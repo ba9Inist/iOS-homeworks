@@ -7,23 +7,43 @@
 
 import UIKit
 
+struct Post {
+    let title: String
+}
+
 class PostViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+    var post: Post
+    
+    init(post: Post) {
+        self.post = post
+        super.init(nibName: nil, bundle: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-    */
-
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.view.backgroundColor = .cyan
+        title = post.title
+        
+        let myButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(OpenInfo))
+        
+        navigationItem.rightBarButtonItem = myButton
+        
+    }
+    
+    @objc func OpenInfo() {
+        let Info = Info(title: "Модальное открытие")
+        
+        let openView = InfoViewController(Info: Info)
+        
+        self.present(openView, animated: true, completion: nil)
+    }
 }
+
+
