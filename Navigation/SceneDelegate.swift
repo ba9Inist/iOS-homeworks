@@ -23,14 +23,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let ProfileController = UINavigationController()
         let tabBarController = UITabBarController()
         
-        FeedController.tabBarItem = UITabBarItem(title: "Лента", image: .feedImg, tag: 0)
+        FeedController.tabBarItem = UITabBarItem(title: "", image: .feedImg, tag: 0)
         FeedController.view.backgroundColor = .systemBackground
-        ProfileController.tabBarItem = UITabBarItem(title: "Профиль", image: .profileImg, tag: 1)
-        ProfileController.view.backgroundColor = .systemGray
+        ProfileController.tabBarItem = UITabBarItem(title: "", image: .profileImg, tag: 1)
+        //ProfileController.view.backgroundColor = .systemGray
         
         FeedController.viewControllers = [FeedViewController()]
+        //Голубев - добавил контроллер в таб бар профиль 21.01.25
+        ProfileController.viewControllers = [ProfileViewController()]
         tabBarController.viewControllers = [FeedController, ProfileController]
         
+        window?.translatesAutoresizingMaskIntoConstraints = false
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         
