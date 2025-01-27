@@ -9,18 +9,13 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    let ProfileHeader: ProfileHeaderView = ProfileHeaderView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .lightGray
         title = "Profile"
         self.view.addSubview(ProfileHeader)
-        self.view.addSubview(ProfileHeader.imgProfile)
-        self.view.addSubview(ProfileHeader.fullNameLabel)
-        self.view.addSubview(ProfileHeader.buttonStatus)
-        self.view.addSubview(ProfileHeader.infoUser)
-        
-        ProfileHeader.buttonStatus.addTarget(self, action: #selector(printStatus), for: .touchUpInside)
-        
     }
     
     override func viewWillLayoutSubviews() {
@@ -28,7 +23,6 @@ class ProfileViewController: UIViewController {
         
     }
     
-    let ProfileHeader: ProfileHeaderView = ProfileHeaderView()
     /*
      // MARK: - Navigation
      
@@ -39,9 +33,4 @@ class ProfileViewController: UIViewController {
      }
      */
     
-    @objc func printStatus() {
-        
-        print(ProfileHeader.infoUser.text!)
-        
-    }
 }
