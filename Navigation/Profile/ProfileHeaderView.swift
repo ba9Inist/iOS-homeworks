@@ -15,6 +15,7 @@ class ProfileHeaderView: UIView {
         addSubview(fullNameLabel)
         addSubview(buttonStatus)
         addSubview(infoUser)
+        addSubview(buttonTitle)
     }
 
     required init?(coder: NSCoder) {
@@ -23,8 +24,7 @@ class ProfileHeaderView: UIView {
     
     let imgProfile: UIImageView = {
         let imageView = UIImageView(image: UIImage(resource: .avatarka))
-        imageView.frame = CGRect(x: 16, y: 136, width: 128, height: 128)
-        //imageView.autoSetDimensions(to: CGSize(width: 128.0, height: 128.0))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.borderWidth = 3.0
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.cornerRadius = 64.0
@@ -34,8 +34,8 @@ class ProfileHeaderView: UIView {
     
     let fullNameLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.frame = CGRect(x: 170, y: 147, width: 200, height: 30)
         label.textColor = .black
         label.text = "Name Name"
         label.numberOfLines = 0
@@ -45,7 +45,7 @@ class ProfileHeaderView: UIView {
     
     let infoUser: UILabel = {
         let textInfo = UILabel()
-        textInfo.frame = CGRect(x: 170, y: 200, width: 200, height: 30)
+        textInfo.translatesAutoresizingMaskIntoConstraints = false
         textInfo.text = "Waiting for something..."
         textInfo.font = UIFont.systemFont(ofSize: 14)
         textInfo.textColor = .gray
@@ -55,9 +55,9 @@ class ProfileHeaderView: UIView {
     
     lazy var buttonStatus: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .systemBlue
         button.setTitle("Snow status", for: .normal)
-        button.frame = CGRect(x: 16, y: 280, width: 400, height: 50)
         button.layer.shadowOffset = CGSize(width: 4.00, height: 4.00)
         button.addTarget(self, action: #selector(printStatus),  for: .touchUpInside)
         button.layer.shadowRadius = 4
@@ -67,6 +67,21 @@ class ProfileHeaderView: UIView {
 
         return button
     }()
+    
+    lazy var buttonTitle: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .systemBlue
+        button.setTitle("Snow status", for: .normal)
+        button.layer.shadowOffset = CGSize(width: 4.00, height: 4.00)
+        button.layer.shadowRadius = 4
+        button.layer.cornerRadius = 4
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.7
+
+        return button
+    }()
+    
     
     @objc func printStatus() {
         print("Status: \(infoUser.text!)")
