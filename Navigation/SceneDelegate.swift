@@ -29,8 +29,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //ProfileController.view.backgroundColor = .systemGray
         
         FeedController.viewControllers = [FeedViewController()]
+        
         //Голубев - добавил контроллер в таб бар профиль 21.01.25
-        ProfileController.viewControllers = [ProfileViewController()]
+        //ProfileController.viewControllers = [ProfileViewController()]
+        
+        //Голубев открытие окна авторизации Макета ВК 03.02.25
+        ProfileController.viewControllers = [LogInViewController()]
+        
         tabBarController.viewControllers = [FeedController, ProfileController]
         
         window?.translatesAutoresizingMaskIntoConstraints = false

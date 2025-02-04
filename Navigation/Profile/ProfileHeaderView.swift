@@ -55,28 +55,12 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-    lazy var buttonTitle: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .systemBlue
-        button.setTitle("Button title", for: .normal)
-        button.layer.shadowOffset = CGSize(width: 4.00, height: 4.00)
-        button.layer.shadowRadius = 4
-        button.layer.cornerRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.7
-
-        return button
-    }()
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(imgProfile)
         addSubview(fullNameLabel)
         addSubview(buttonStatus)
         addSubview(infoUser)
-        addSubview(buttonTitle)
         setupConstraints()
     }
 
@@ -89,8 +73,6 @@ class ProfileHeaderView: UIView {
    }
     
     private func setupConstraints(){
-        
-        let safeZone = self.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
             
@@ -112,35 +94,27 @@ class ProfileHeaderView: UIView {
             imgProfile.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
             
             //Отступ сверху от безопасной зоны
-            imgProfile.topAnchor.constraint(equalTo: safeZone.topAnchor, constant: 16),
+            imgProfile.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             
             
             //Имя профиля
 
-            fullNameLabel.leftAnchor.constraint(equalTo: safeZone.leftAnchor, constant: 150),
-            fullNameLabel.topAnchor.constraint(equalTo: safeZone.topAnchor, constant: 27),
+            fullNameLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 150),
+            fullNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
 
 
             //Описание профиля
 
-            infoUser.leftAnchor.constraint(equalTo: safeZone.leftAnchor, constant: 150),
-            infoUser.topAnchor.constraint(equalTo: safeZone.topAnchor, constant: 100),
+            infoUser.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 150),
+            infoUser.topAnchor.constraint(equalTo: self.topAnchor, constant: 100),
 
 
             //Кнопка статуса
 
-            buttonStatus.topAnchor.constraint(equalTo: safeZone.topAnchor, constant: 160),
-            buttonStatus.leftAnchor.constraint(equalTo: safeZone.leftAnchor, constant: 16),
-            buttonStatus.centerXAnchor.constraint(equalTo: safeZone.centerXAnchor),
+            buttonStatus.topAnchor.constraint(equalTo: self.topAnchor, constant: 160),
+            buttonStatus.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
+            buttonStatus.centerXAnchor.constraint(equalTo: self.centerXAnchor),
 
-            
-            //Кнопка заголовка
-
-            buttonTitle.leftAnchor.constraint(equalTo: safeZone.leftAnchor, constant: 0),
-            buttonTitle.rightAnchor.constraint(equalTo: safeZone.rightAnchor, constant: 0),
-            buttonTitle.bottomAnchor.constraint(equalTo: safeZone.bottomAnchor, constant: 32)
-        
-            
         ])
     }
 
