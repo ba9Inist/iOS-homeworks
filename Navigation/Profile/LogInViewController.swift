@@ -14,7 +14,7 @@ class LogInViewController: UIViewController {
         
         scrollView.showsVerticalScrollIndicator = true
         scrollView.showsHorizontalScrollIndicator = false
-        scrollView.backgroundColor = .red
+        scrollView.backgroundColor = .clear
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -41,9 +41,6 @@ class LogInViewController: UIViewController {
     private lazy var telefonUser: UITextField = {
         let telefon = UITextField()
         telefon.translatesAutoresizingMaskIntoConstraints = false
-        telefon.layer.borderWidth = 0.5
-        telefon.layer.borderColor = UIColor.lightGray.cgColor
-        telefon.layer.cornerRadius = 10.0 / 2.0
         telefon.textColor = .black
         telefon.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         telefon.tintColor = .colorVK
@@ -61,9 +58,6 @@ class LogInViewController: UIViewController {
     private lazy var passUser: UITextField = {
         let password = UITextField()
         password.translatesAutoresizingMaskIntoConstraints = false
-        password.layer.borderWidth = 0.5
-        password.layer.borderColor = UIColor.lightGray.cgColor
-        password.layer.cornerRadius = 10.0 / 2.0
         password.textColor = .black
         password.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         password.tintColor = .colorVK
@@ -87,7 +81,28 @@ class LogInViewController: UIViewController {
         button.layer.cornerRadius = 10.0
         button.setBackgroundImage(UIImage(resource: .bluePixel), for: .normal)
         button.alpha = 1.0
+        button.clipsToBounds = true
         return button
+    }()
+    
+    private lazy var separatorTextLabel: UIView = {
+        let separator = UIView()
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        separator.backgroundColor = .lightGray
+        return separator
+    }()
+    
+    private lazy var stackUI: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [telefonUser, passUser])
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        stack.spacing = 0
+        stack.distribution = .fillEqually
+        stack.layer.cornerRadius = 10
+        stack.layer.borderWidth = 1
+        stack.layer.borderColor = UIColor.lightGray.cgColor
+        
+        return stack
     }()
     
     override func viewDidLoad() {
@@ -98,26 +113,28 @@ class LogInViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-           super.viewWillAppear(animated)
-           
-           setupKeyboardObservers()
-       }
-       
-       override func viewWillDisappear(_ animated: Bool) {
-           super.viewWillDisappear(animated)
-           
-           removeKeyboardObservers()
-       }
-       
+        super.viewWillAppear(animated)
+        
+        setupKeyboardObservers()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        removeKeyboardObservers()
+    }
+    
     private func addSubview() {
         
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(logoVK)
-        contentView.addSubview(telefonUser)
-        contentView.addSubview(passUser)
         contentView.addSubview(buttonLogin)
-
+        contentView.addSubview(stackUI)
+        stackUI.addSubview(telefonUser)
+        stackUI.addSubview(passUser)
+        stackUI.addSubview(separatorTextLabel)
+        
     }
     
     private func setupConstraints(){
@@ -137,26 +154,32 @@ class LogInViewController: UIViewController {
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-        
+            
             logoVK.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
             logoVK.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             logoVK.widthAnchor.constraint(equalToConstant: 100),
             logoVK.heightAnchor.constraint(equalToConstant: 100),
             
-            telefonUser.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            telefonUser.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            telefonUser.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
-            telefonUser.heightAnchor.constraint(equalToConstant: 50),
-            
-            passUser.topAnchor.constraint(equalTo: telefonUser.bottomAnchor),
-            passUser.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            passUser.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            passUser.heightAnchor.constraint(equalToConstant: 50),
-
             buttonLogin.topAnchor.constraint(equalTo: passUser.bottomAnchor, constant: 16),
             buttonLogin.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             buttonLogin.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             buttonLogin.heightAnchor.constraint(equalToConstant: 50),
+            
+            stackUI.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            stackUI.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            stackUI.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
+            stackUI.heightAnchor.constraint(equalToConstant: 100),
+            
+            telefonUser.centerXAnchor.constraint(equalTo: stackUI.centerXAnchor),
+            telefonUser.heightAnchor.constraint(equalToConstant: 50),
+            
+            separatorTextLabel.centerXAnchor.constraint(equalTo: stackUI.centerXAnchor),
+            separatorTextLabel.heightAnchor.constraint(equalToConstant: 0.5),
+            separatorTextLabel.centerYAnchor.constraint(equalTo: stackUI.centerYAnchor),
+            separatorTextLabel.widthAnchor.constraint(equalTo: stackUI.widthAnchor, multiplier: 1),
+            
+            passUser.topAnchor.constraint(equalTo: telefonUser.bottomAnchor),
+            passUser.heightAnchor.constraint(equalToConstant: 50),
             
             
         ])
@@ -185,19 +208,27 @@ class LogInViewController: UIViewController {
         notificationCenter.removeObserver(self)
     }
     
-   @objc private func windowProfileView() {
-       navigationController?.pushViewController(ProfileViewController(), animated: true)
+    @objc private func windowProfileView() {
+        navigationController?.pushViewController(ProfileViewController(), animated: true)
     }
     
+    private var originalContentInset: UIEdgeInsets = .zero
+    
     @objc func willShowKeyboard(_ notification: NSNotification) {
-        let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
-        scrollView.contentInset.bottom += keyboardHeight ?? 0.0
+        guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        
+        let keyboardHeight = keyboardFrame.height
+        
+        originalContentInset = scrollView.contentInset // Запоминаем текущие отступы
+        
+        scrollView.contentInset.bottom = keyboardHeight
+        scrollView.verticalScrollIndicatorInsets.bottom = keyboardHeight
     }
     
     @objc func willHideKeyboard(_ notification: NSNotification) {
         scrollView.contentInset.bottom = 0.0
     }
- 
+    
     
 }
 
