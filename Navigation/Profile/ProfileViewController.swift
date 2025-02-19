@@ -11,29 +11,43 @@ class ProfileViewController: UIViewController {
     
     let profileHeader: ProfileHeaderView = ProfileHeaderView()
     
-    lazy var buttonTitle: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .systemBlue
-        button.setTitle("Button title", for: .normal)
-        button.layer.shadowOffset = CGSize(width: 4.00, height: 4.00)
-        button.layer.shadowRadius = 4
-        button.layer.cornerRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.7
-        
-        return button
+    fileprivate let posts = postProfile.make()
+
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .white
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100.00
+        tableView.tableFooterView = UIView()
+        tableView.register(
+            CustomTableViewCell.self,
+            forCellReuseIdentifier: "CustomTableViewCell_ReuseID"
+        )
+        tableView.register(
+            UITableViewHeaderFooterView.self,
+            forHeaderFooterViewReuseIdentifier: "CustomTableViewCell_ReuseID"
+        )
+        tableView.delegate = self
+        tableView.dataSource = self
+        return tableView
     }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .lightGray
         title = "Profile"
         profileHeader.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(profileHeader)
-        self.view.addSubview(buttonTitle)
+        addSubviews()
         setupConstraints()
         
+    }
+    
+    private func addSubviews(){
+        view.addSubview(profileHeader)
+        //view.addSubview(buttonTitle)
+        view.addSubview(tableView)
     }
     
     private func setupConstraints(){
@@ -48,12 +62,33 @@ class ProfileViewController: UIViewController {
             profileHeader.topAnchor.constraint(equalTo: safeZone.topAnchor, constant: 0),
             profileHeader.heightAnchor.constraint(equalToConstant: 220),
             
-            //Кнопка заголовка
-            
-            buttonTitle.leftAnchor.constraint(equalTo: safeZone.leftAnchor, constant: 0),
-            buttonTitle.rightAnchor.constraint(equalTo: safeZone.rightAnchor, constant: 0),
-            buttonTitle.bottomAnchor.constraint(equalTo: safeZone.bottomAnchor, constant: -16)
+            tableView.topAnchor.constraint(equalTo: profileHeader.bottomAnchor, constant: 16),
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             
         ])
     }
+}
+
+extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Возвращаем количество строк в секции
+        return posts.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Создаем и конфигурируем ячейку
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier:"CustomTableViewCell_ReuseID"  ,
+            for: indexPath
+        ) as? CustomTableViewCell else {
+                    fatalError("could not dequeueReusableCell")
+                }
+        cell.update(model: posts[indexPath.row])
+
+                return cell
+    }
+    
 }

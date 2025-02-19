@@ -55,12 +55,16 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .white
+        return tableView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(imgProfile)
-        addSubview(fullNameLabel)
-        addSubview(buttonStatus)
-        addSubview(infoUser)
+        addSubviews()
         setupConstraints()
     }
 
@@ -71,6 +75,13 @@ class ProfileHeaderView: UIView {
     @objc func printStatus() {
         print("Status: \(infoUser.text!)")
    }
+    
+    private func addSubviews() {
+        addSubview(imgProfile)
+        addSubview(fullNameLabel)
+        addSubview(buttonStatus)
+        addSubview(infoUser)
+    }
     
     private func setupConstraints(){
         

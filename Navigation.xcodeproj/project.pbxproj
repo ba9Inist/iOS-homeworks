@@ -18,6 +18,8 @@
 		BF9214332D3FB301006AF6E0 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9214322D3FB301006AF6E0 /* ProfileHeaderView.swift */; };
 		BF9214352D3FB326006AF6E0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9214342D3FB326006AF6E0 /* ProfileViewController.swift */; };
 		BF9214392D50F940006AF6E0 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9214382D50F940006AF6E0 /* LogInViewController.swift */; };
+		BFA126252D64B79700727D88 /* PostStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA126242D64B79700727D88 /* PostStruct.swift */; };
+		BFA126282D65D1FE00727D88 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA126272D65D1FE00727D88 /* CustomTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		BF9214322D3FB301006AF6E0 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		BF9214342D3FB326006AF6E0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		BF9214382D50F940006AF6E0 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		BFA126242D64B79700727D88 /* PostStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStruct.swift; sourceTree = "<group>"; };
+		BFA126272D65D1FE00727D88 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,7 @@
 				BF5568D82D37E47700DFA472 /* PostViewController.swift */,
 				BF5568DA2D37EA9C00DFA472 /* InfoViewController.swift */,
 				BF9214312D3FB2A4006AF6E0 /* Profile */,
+				BFA126262D65D17100727D88 /* TableViewProfile */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -88,6 +93,15 @@
 				BF9214382D50F940006AF6E0 /* LogInViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		BFA126262D65D17100727D88 /* TableViewProfile */ = {
+			isa = PBXGroup;
+			children = (
+				BFA126242D64B79700727D88 /* PostStruct.swift */,
+				BFA126272D65D1FE00727D88 /* CustomTableViewCell.swift */,
+			);
+			path = TableViewProfile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,8 +176,10 @@
 			files = (
 				BF5568C72D35191D00DFA472 /* ViewController.swift in Sources */,
 				BF5568C32D35191D00DFA472 /* AppDelegate.swift in Sources */,
+				BFA126282D65D1FE00727D88 /* CustomTableViewCell.swift in Sources */,
 				BF9214392D50F940006AF6E0 /* LogInViewController.swift in Sources */,
 				BF5568D72D37E13D00DFA472 /* FeedViewController.swift in Sources */,
+				BFA126252D64B79700727D88 /* PostStruct.swift in Sources */,
 				BF5568C52D35191D00DFA472 /* SceneDelegate.swift in Sources */,
 				BF9214332D3FB301006AF6E0 /* ProfileHeaderView.swift in Sources */,
 				BF5568DB2D37EA9C00DFA472 /* InfoViewController.swift in Sources */,
