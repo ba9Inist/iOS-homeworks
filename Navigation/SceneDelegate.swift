@@ -11,12 +11,37 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+    func scene(_ scene: UIScene,
+               willConnectTo session: UISceneSession,
+               options connectionOptions: UIScene.ConnectionOptions)
+    {
+        guard let scene = (scene as? UIWindowScene) else { return }
+        
+        window = UIWindow(windowScene: scene)
+        
+        let FeedController = UINavigationController()
+        let ProfileController = UINavigationController()
+        let tabBarController = UITabBarController()
+        
+        FeedController.tabBarItem = UITabBarItem(title: "", image: .feedImg, tag: 0)
+        FeedController.view.backgroundColor = .systemBackground
+        ProfileController.tabBarItem = UITabBarItem(title: "", image: .profileImg, tag: 1)
+        //ProfileController.view.backgroundColor = .systemGray
+        
+        FeedController.viewControllers = [FeedViewController()]
+        
+        //Голубев - добавил контроллер в таб бар профиль 21.01.25
+        //ProfileController.viewControllers = [ProfileViewController()]
+        
+        //Голубев открытие окна авторизации Макета ВК 03.02.25
+        ProfileController.viewControllers = [LogInViewController()]
+        
+        tabBarController.viewControllers = [FeedController, ProfileController]
+        
+        window?.translatesAutoresizingMaskIntoConstraints = false
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
