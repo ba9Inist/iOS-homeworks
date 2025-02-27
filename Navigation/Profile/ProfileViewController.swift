@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import StorageService
 class ProfileViewController: UIViewController {
     
     let profileHeader: ProfileHeaderView = ProfileHeaderView()
@@ -18,7 +18,7 @@ class ProfileViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .white
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 100.00
+        tableView.estimatedRowHeight = 150.00
         tableView.tableFooterView = UIView()
         tableView.register(
             CustomTableViewCell.self,
@@ -36,7 +36,13 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        #if DEBUG
         self.view.backgroundColor = .lightGray
+        #else
+        self.view.backgroundColor = .blue
+        #endif
+        
         title = "Profile"
         profileHeader.translatesAutoresizingMaskIntoConstraints = false
         addSubviews()

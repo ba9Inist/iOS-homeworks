@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import StorageService
+
 
 class CustomTableViewCell: UITableViewCell {
     
@@ -71,7 +73,7 @@ class CustomTableViewCell: UITableViewCell {
             style: .subtitle,
             reuseIdentifier: reuseIdentifier
         )
-        
+
         tuneView()
         addSubviews()
         setupConstraints()
@@ -105,19 +107,19 @@ class CustomTableViewCell: UITableViewCell {
     // MARK: - Private
     
     private func tuneView() {
-        //        backgroundColor = .tertiarySystemBackground
-        //        contentView.backgroundColor = .tertiarySystemBackground
-        //        textLabel?.backgroundColor = .clear
-        //        detailTextLabel?.backgroundColor = .clear
-        //        imageView?.backgroundColor = .clear
-        //
-        //        accessoryView = nil
-        //        accessoryType = .disclosureIndicator
+                backgroundColor = .tertiarySystemBackground
+                contentView.backgroundColor = .tertiarySystemBackground
+                textLabel?.backgroundColor = .clear
+                detailTextLabel?.backgroundColor = .clear
+                imageView?.backgroundColor = .clear
         
-        //        selectionStyle = .gray
-        //        let selectedView = UIView()
-        //        selectedView.backgroundColor = .systemYellow
-        //        selectedBackgroundView = selectedView
+                accessoryView = nil
+                accessoryType = .disclosureIndicator
+        
+                selectionStyle = .gray
+                let selectedView = UIView()
+                selectedView.backgroundColor = .systemYellow
+                selectedBackgroundView = selectedView
     }
     
     private func addSubviews() {
@@ -133,25 +135,27 @@ class CustomTableViewCell: UITableViewCell {
         //        let screenWidth = UIScreen.main.bounds.width
         //        let screenHeight = UIScreen.main.bounds.height
         
-        //test coomit
         
         NSLayoutConstraint.activate([
             
             author.topAnchor.constraint(equalTo: contentView.topAnchor),
             author.leftAnchor.constraint(equalTo: contentView.leftAnchor,constant: 16),
             
-            //            image.widthAnchor.constraint(equalToConstant: 100),
-            //            image.topAnchor.constraint(equalTo: author.bottomAnchor),
-            //            image.heightAnchor.constraint(equalToConstant: 100),
-            //
-                        postdescription.topAnchor.constraint(equalTo: author.bottomAnchor),
-                        postdescription.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
-            //
-            //            likes.topAnchor.constraint(equalTo: postdescription.bottomAnchor),
-            //            views.topAnchor.constraint(equalTo: postdescription.bottomAnchor),
-            //
-            //            likes.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            //            views.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            image.widthAnchor.constraint(equalToConstant: 100),
+            image.topAnchor.constraint(equalTo: author.bottomAnchor),
+            image.heightAnchor.constraint(equalToConstant: 100),
+            
+            postdescription.topAnchor.constraint(equalTo: author.bottomAnchor),
+            postdescription.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
+            
+            likes.topAnchor.constraint(equalTo: postdescription.bottomAnchor),
+            views.topAnchor.constraint(equalTo: postdescription.bottomAnchor),
+            
+            likes.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            views.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            
+            likes.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            views.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
             
         ])
         
@@ -162,19 +166,18 @@ class CustomTableViewCell: UITableViewCell {
         dataPost = model
         author.text = dataPost?.author
         postdescription.text = dataPost?.description
-        //        if let imageUrl = dataPost?.image {
-        //            image.image = UIImage(named: imageUrl)
-        //        }
-        //        if let likesInt = dataPost?.likes {
-        //            let likeString = String(likesInt)
-        //            likes.text = "Likes: \(likeString)"
-        //        }
-        //
-        //        if let viewsInt = dataPost?.views {
-        //            let viewString = String(viewsInt)
-        //            views.text = "Views: \(viewString)"
-        //        }
+                if let imageUrl = dataPost?.image {
+                    image.image = UIImage(named: imageUrl)
+                }
+                if let likesInt = dataPost?.likes {
+                    let likeString = String(likesInt)
+                    likes.text = "Likes: \(likeString)"
+                }
         
+                if let viewsInt = dataPost?.views {
+                    let viewString = String(viewsInt)
+                    views.text = "Views: \(viewString)"
+                }
         
     }
     

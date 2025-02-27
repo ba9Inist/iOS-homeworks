@@ -9,17 +9,17 @@ import Foundation
 
 import UIKit
 
-struct postProfile {
-    let author: String
-    let description: String
-    let image: String
-    let likes: Int
-    let views: Int
+public struct postProfile {
+    public let author: String
+    public let description: String
+    public let image: String
+    public let likes: Int
+    public let views: Int
 }
 
 extension postProfile {
     
-    static func make() -> [postProfile] {
+    static public func make() -> [postProfile] {
         [
             postProfile(
                 author: "Павел Дуров",
